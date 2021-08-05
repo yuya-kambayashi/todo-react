@@ -48,13 +48,21 @@ export const App = () => {
     setIncompleteTodos(newIncompleteTodos);
   };
 
+  const overIncompleteTodosLimit = () => {
+    return incompleteTodos.length >= 5;
+  };
+
   return (
     <>
       <InputTodo
         todoText={todoText}
         onChange={onChangeTodoText}
         onClick={onClickAdd}
+        disabled={incompleteTodos.length >= 5}
       />
+      {overIncompleteTodosLimit() && (
+        <p style={{ color: "red" }}>登録できるtodoは5個までです</p>
+      )}
       <div className="incomplete-area">
         <p className="title">未完了のTODO</p>
         <ul>
